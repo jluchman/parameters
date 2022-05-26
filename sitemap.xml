@@ -52,6 +52,9 @@
     <loc>/articles/parameters_selection.html</loc>
   </url>
   <url>
+    <loc>/articles/standardize_parameters_effsize.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -113,6 +116,9 @@
   </url>
   <url>
     <loc>/reference/display.parameters_model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dominance_analysis.html</loc>
   </url>
   <url>
     <loc>/reference/dot-data_frame.html</loc>
@@ -305,5 +311,11 @@
   </url>
   <url>
     <loc>/reference/standard_error_robust.html</loc>
+  </url>
+  <url>
+    <loc>/reference/standardize_info.html</loc>
+  </url>
+  <url>
+    <loc>/reference/standardize_parameters.html</loc>
   </url>
 </urlset>
