@@ -16,7 +16,7 @@ i.e., by what they are divided. The "basic" method of standardization uses.'><me
     
     <a class="navbar-brand me-2" href="../index.html">parameters</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,8 @@ i.e., by what they are divided. The "basic" method of standardization uses.'><me
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/overview_of_vignettes.html">Overview of Vignettes</a>
+    <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Parameters Description</h6>
     <a class="dropdown-item" href="../articles/model_parameters.html">Summary of Model Parameters</a>
     <a class="dropdown-item" href="../articles/model_parameters_standardized.html">Standardized Model Parameters</a>
@@ -95,26 +97,37 @@ i.e., by what they are divided. The "basic" method of standardization uses.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>model</dt>
 <dd><p>A statistical model.</p></dd>
+
+
 <dt>robust</dt>
 <dd><p>Logical, if <code>TRUE</code>, centering is done by subtracting the
 median from the variables and dividing it by the median absolute deviation
 (MAD). If <code>FALSE</code>, variables are standardized by subtracting the
 mean and dividing it by the standard deviation (SD).</p></dd>
+
+
 <dt>two_sd</dt>
 <dd><p>If <code>TRUE</code>, the variables are scaled by two times the deviation
 (SD or MAD depending on <code>robust</code>). This method can be useful to obtain
 model coefficients of continuous parameters comparable to coefficients
 related to binary predictors, when applied to <strong>the predictors</strong> (not the
 outcome) (Gelman, 2008).</p></dd>
+
+
 <dt>include_pseudo</dt>
 <dd><p>(For (G)LMMs) Should Pseudo-standardized information be
 included?</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame with information on each parameter (see
+    
+
+<p>A data frame with information on each parameter (see
 <code><a href="parameters_type.html">parameters_type()</a></code>), and various standardization coefficients
 for the post-hoc methods (see <code><a href="standardize_parameters.html">standardize_parameters()</a></code>) for the predictor
 and the response.</p>
@@ -250,7 +263,7 @@ and the response.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

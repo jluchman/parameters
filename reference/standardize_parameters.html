@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">parameters</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +24,8 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/overview_of_vignettes.html">Overview of Vignettes</a>
+    <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Parameters Description</h6>
     <a class="dropdown-item" href="../articles/model_parameters.html">Summary of Model Parameters</a>
     <a class="dropdown-item" href="../articles/model_parameters_standardized.html">Standardized Model Parameters</a>
@@ -99,40 +101,57 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>model</dt>
 <dd><p>A statistical model.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>The method used for standardizing the parameters. Can be
 <code>"refit"</code> (default), <code>"posthoc"</code>, <code>"smart"</code>, <code>"basic"</code> or <code>"pseudo"</code>. See
 'Details'.</p></dd>
+
+
 <dt>ci</dt>
 <dd><p>Confidence Interval (CI) level</p></dd>
+
+
 <dt>robust</dt>
 <dd><p>Logical, if <code>TRUE</code>, centering is done by subtracting the
 median from the variables and dividing it by the median absolute deviation
 (MAD). If <code>FALSE</code>, variables are standardized by subtracting the
 mean and dividing it by the standard deviation (SD).</p></dd>
+
+
 <dt>two_sd</dt>
 <dd><p>If <code>TRUE</code>, the variables are scaled by two times the deviation
 (SD or MAD depending on <code>robust</code>). This method can be useful to obtain
 model coefficients of continuous parameters comparable to coefficients
 related to binary predictors, when applied to <strong>the predictors</strong> (not the
 outcome) (Gelman, 2008).</p></dd>
+
+
 <dt>include_response</dt>
 <dd><p>If <code>TRUE</code> (default), the response value will also be
 standardized. If <code>FALSE</code>, only the predictors will be standardized. For
 GLMs the response value will never be standardized (see <em>Generalized Linear
 Models</em> section).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Toggle warnings and messages on or off.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>For <code>standardize_parameters()</code>, arguments passed to
 <code><a href="model_parameters.html">model_parameters()</a></code>, such as:</p><ul><li><p><code>ci_method</code>, <code>centrality</code> for Mixed models and Bayesian models...</p></li>
 <li><p><code>exponentiate</code>, ...</p></li>
 <li><p>etc.</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame with the standardized parameters (<code>Std_*</code>, depending on
+    
+
+<p>A data frame with the standardized parameters (<code>Std_*</code>, depending on
 the model type) and their CIs (<code>CI_low</code> and <code>CI_high</code>). Where applicable,
 standard errors (SEs) are returned as an attribute (<code>attr(x, "standard_error")</code>).</p>
     </div>
@@ -187,7 +206,7 @@ are standardized based on their SD at level of prediction (see also
 on a fitted random-intercept-model, where <code>sqrt(random-intercept-variance)</code>
 is used for level 2 predictors, and <code>sqrt(residual-variance)</code> is used for
 level 1 predictors (Hoffman 2015, page 342). A warning is given when a
-within-group varialbe is found to have access between-group variance.</p></li>
+within-group variable is found to have access between-group variance.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="transformed-variables">Transformed Variables<a class="anchor" aria-label="anchor" href="#transformed-variables"></a></h2>
@@ -381,7 +400,7 @@ model.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

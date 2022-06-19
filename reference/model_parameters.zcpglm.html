@@ -12,7 +12,7 @@ cplm or countreg)."><meta property="og:image" content="/reference/figures/card.p
     
     <a class="navbar-brand me-2" href="../index.html">parameters</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +26,8 @@ cplm or countreg)."><meta property="og:image" content="/reference/figures/card.p
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/overview_of_vignettes.html">Overview of Vignettes</a>
+    <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Parameters Description</h6>
     <a class="dropdown-item" href="../articles/model_parameters.html">Summary of Model Parameters</a>
     <a class="dropdown-item" href="../articles/model_parameters_standardized.html">Standardized Model Parameters</a>
@@ -165,21 +167,31 @@ cplm or countreg)."><meta property="og:image" content="/reference/figures/card.p
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>model</dt>
 <dd><p>A model with zero-inflation component.</p></dd>
+
+
 <dt>ci</dt>
 <dd><p>Confidence Interval (CI) level. Default to <code>0.95</code> (<code>95%</code>).</p></dd>
+
+
 <dt>bootstrap</dt>
 <dd><p>Should estimates be based on bootstrapped model? If
 <code>TRUE</code>, then arguments of <a href="model_parameters.stanreg.html">Bayesian regressions</a> apply (see also
 <code><a href="bootstrap_parameters.html">bootstrap_parameters()</a></code>).</p></dd>
+
+
 <dt>iterations</dt>
 <dd><p>The number of bootstrap replicates. This only apply in the
 case of bootstrapped frequentist models.</p></dd>
+
+
 <dt>component</dt>
 <dd><p>Should all parameters, parameters for the conditional model,
 for the zero-inflated part of the model, or the dispersion model be returned?
 Applies to models with zero-inflated and/or dispersion component. <code>component</code>
 may be one of <code>"conditional"</code>, <code>"zi"</code>, <code>"zero-inflated"</code>, <code>"dispersion"</code> or
 <code>"all"</code> (default). May be abbreviated.</p></dd>
+
+
 <dt>standardize</dt>
 <dd><p>The method used for standardizing the parameters. Can be
 <code>NULL</code> (default; no standardization), <code>"refit"</code> (for re-fitting the model
@@ -195,6 +207,8 @@ effects will be returned.</p></li>
 <li><p>Robust estimation (i.e., <code>vcov</code> set to a value other than <code>NULL</code>) of standardized parameters only
 works when <code>standardize="refit"</code>.</p></li>
 </ul></dd>
+
+
 <dt>exponentiate</dt>
 <dd><p>Logical, indicating whether or not to exponentiate the
 the coefficients (and related confidence intervals). This is typical for
@@ -207,12 +221,16 @@ transformed coefficient. The transformed confidence interval more clearly
 captures this uncertainty. For <code><a href="compare_parameters.html">compare_parameters()</a></code>,
 <code>exponentiate = "nongaussian"</code> will only exponentiate coefficients
 from non-Gaussian families.</p></dd>
+
+
 <dt>p_adjust</dt>
 <dd><p>Character vector, if not <code>NULL</code>, indicates the method to
 adjust p-values. See <code><a href="https://rdrr.io/r/stats/p.adjust.html" class="external-link">stats::p.adjust()</a></code> for details. Further
 possible adjustment methods are <code>"tukey"</code>, <code>"scheffe"</code>,
 <code>"sidak"</code> and <code>"none"</code> to explicitly disable adjustment for
 <code>emmGrid</code> objects (from <strong>emmeans</strong>).</p></dd>
+
+
 <dt>keep</dt>
 <dd><p>Character containing a regular expression pattern that
 describes the parameters that should be included (for <code>keep</code>) or excluded
@@ -233,25 +251,38 @@ should match the parameter names as they are stored in the returned data
 frame, which can be different from how they are printed. Inspect the
 <code>$Parameter</code> column of the parameters table to get the exact parameter
 names.</p></dd>
+
+
 <dt>drop</dt>
 <dd><p>See <code>keep</code>.</p></dd>
+
+
 <dt>parameters</dt>
 <dd><p>Deprecated, alias for <code>keep</code>.</p></dd>
+
+
 <dt>summary</dt>
 <dd><p>Logical, if <code>TRUE</code>, prints summary information about the
 model (model formula, number of observations, residual standard deviation
 and more).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Toggle warnings and messages.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods. For instance, when
 <code>bootstrap = TRUE</code>, arguments like <code>type</code> or <code>parallel</code> are
 passed down to <code><a href="bootstrap_model.html">bootstrap_model()</a></code>, and arguments like <code>ci_method</code>
 are passed down to <code><a href="https://easystats.github.io/bayestestR/reference/describe_posterior.html" class="external-link">bayestestR::describe_posterior()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame of indices related to the model's parameters.</p>
+    
+
+<p>A data frame of indices related to the model's parameters.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -302,7 +333,7 @@ columns into a consistent, standardized naming scheme.</p></div>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

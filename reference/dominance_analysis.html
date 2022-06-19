@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">parameters</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +24,8 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/overview_of_vignettes.html">Overview of Vignettes</a>
+    <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Parameters Description</h6>
     <a class="dropdown-item" href="../articles/model_parameters.html">Summary of Model Parameters</a>
     <a class="dropdown-item" href="../articles/model_parameters_standardized.html">Standardized Model Parameters</a>
@@ -88,6 +90,8 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>model</dt>
 <dd><p>A model object supported by <code><a href="https://easystats.github.io/performance/reference/r2.html" class="external-link">performance::r2()</a></code>. See 'Details'.</p></dd>
+
+
 <dt>sets</dt>
 <dd><p>A (named) list of formula objects with no left hand
 side/response.  If the list has names, the name provided each element
@@ -97,30 +101,45 @@ provided a set number name based on its position among the sets as entered.</p>
 analysis and dominance statistics and designations are computed for
 the predictors together.  Predictors in <code>sets</code> must be present in the model
 submitted to the <code>model</code> argument and cannot be in the <code>all</code> argument.</p></dd>
+
+
 <dt>all</dt>
 <dd><p>A formula with no left hand side/response.</p>
 <p>Predictors in the formula are included in each subset in the dominance
 analysis and the R2 value associated with them is subtracted from the
 overall value.  Predictors in <code>all</code> must be present in the model
 submitted to the <code>model</code> argument and cannot be in the <code>sets</code> argument.</p></dd>
+
+
 <dt>conditional</dt>
 <dd><p>Logical.  If <code>FALSE</code> then conditional dominance matrix is not computed.</p>
 <p>If conditional dominance is not desired as an importance criterion, avoiding computing the conditional dominance matrix can save computation time.</p></dd>
+
+
 <dt>complete</dt>
 <dd><p>Logical.  If <code>FALSE</code> then complete dominance matrix is not computed.</p>
 <p>If complete dominance is not desired as an importance criterion, avoiding computing complete dominance designations can save computation time.</p></dd>
+
+
 <dt>quote_args</dt>
 <dd><p>A character vector of arguments in the model submitted to
 <code>model</code> to <code><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote()</a></code> prior to submitting to the dominance analysis.  This
 is necessary for data masked arguments (e.g., <code>weights</code>) to prevent them
 from being evaluated before being applied to the model and causing an error.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Not used at current.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Object of class <code>"parameters_da"</code>.
-An object of class <code>"parameters_da"</code> is a list of <code>data.frame</code>s composed
+    
+
+<p>Object of class <code>"parameters_da"</code>.</p>
+
+
+<p>An object of class <code>"parameters_da"</code> is a list of <code>data.frame</code>s composed
 of the following elements:</p><dl><dt><code>general</code></dt>
 <dd><p>A <code>data.frame</code> which associates dominance statistics with
 model parameters. The variables in this <code>data.frame</code> include:</p><dl><dt><code>parameter</code></dt>
@@ -283,7 +302,7 @@ regression based on variance decomposition. The American Statistician,
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

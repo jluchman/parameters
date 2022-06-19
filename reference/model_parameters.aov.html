@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">parameters</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +24,8 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/overview_of_vignettes.html">Overview of Vignettes</a>
+    <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Parameters Description</h6>
     <a class="dropdown-item" href="../articles/model_parameters.html">Summary of Model Parameters</a>
     <a class="dropdown-item" href="../articles/model_parameters_standardized.html">Standardized Model Parameters</a>
@@ -215,46 +217,66 @@
 <dd><p>Object of class <code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov()</a></code>, <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code>,
 <code>aovlist</code>, <code>Gam</code>, <code><a href="https://rdrr.io/r/stats/manova.html" class="external-link">manova()</a></code>, <code>Anova.mlm</code>,
 <code>afex_aov</code> or <code>maov</code>.</p></dd>
+
+
 <dt>omega_squared</dt>
 <dd><p>Compute omega squared as index of effect size. Can be
 <code>"partial"</code> (the default, adjusted for effect size) or <code>"raw"</code>.</p></dd>
+
+
 <dt>eta_squared</dt>
 <dd><p>Compute eta squared as index of effect size. Can be
 <code>"partial"</code> (the default, adjusted for effect size), <code>"raw"</code>  or
 <code>"adjusted"</code> (the latter option only for ANOVA-tables from mixed
 models).</p></dd>
+
+
 <dt>epsilon_squared</dt>
 <dd><p>Compute epsilon squared as index of effect size. Can
 be <code>"partial"</code> (the default, adjusted for effect size) or
 <code>"raw"</code>.</p></dd>
+
+
 <dt>df_error</dt>
 <dd><p>Denominator degrees of freedom (or degrees of freedom of the
 error estimate, i.e., the residuals). This is used to compute effect sizes
 for ANOVA-tables from mixed models. See 'Examples'. (Ignored for
 <code>afex_aov</code>.)</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Numeric, type of sums of squares. May be 1, 2 or 3. If 2 or 3,
 ANOVA-tables using <code><a href="https://rdrr.io/pkg/car/man/Anova.html" class="external-link">car::Anova()</a></code> will be returned. (Ignored for
 <code>afex_aov</code>.)</p></dd>
+
+
 <dt>ci</dt>
 <dd><p>Confidence Interval (CI) level for effect sizes
 <code>omega_squared</code>, <code>eta_squared</code> etc. The default, <code>NULL</code>,
 will compute no confidence intervals. <code>ci</code> should be a scalar between
 0 and 1.</p></dd>
+
+
 <dt>alternative</dt>
 <dd><p>A character string specifying the alternative hypothesis;
 Controls the type of CI returned: <code>"two.sided"</code> (default, two-sided CI),
 <code>"greater"</code> or <code>"less"</code> (one-sided CI). Partial matching is allowed
 (e.g., <code>"g"</code>, <code>"l"</code>, <code>"two"</code>...). See section <em>One-Sided CIs</em> in
 the <a href="https://easystats.github.io/effectsize/" class="external-link">effectsize_CIs vignette</a>.</p></dd>
+
+
 <dt>test</dt>
 <dd><p>String, indicating the type of test for <code>Anova.mlm</code> to be
 returned. If <code>"multivariate"</code> (or <code>NULL</code>), returns the summary of
 the multivariate test (that is also given by the <code>print</code>-method). If
 <code>test = "univariate"</code>, returns the summary of the univariate test.</p></dd>
+
+
 <dt>power</dt>
 <dd><p>Logical, if <code>TRUE</code>, adds a column with power for each
 parameter.</p></dd>
+
+
 <dt>keep</dt>
 <dd><p>Character containing a regular expression pattern that
 describes the parameters that should be included (for <code>keep</code>) or excluded
@@ -275,22 +297,35 @@ should match the parameter names as they are stored in the returned data
 frame, which can be different from how they are printed. Inspect the
 <code>$Parameter</code> column of the parameters table to get the exact parameter
 names.</p></dd>
+
+
 <dt>drop</dt>
 <dd><p>See <code>keep</code>.</p></dd>
+
+
 <dt>parameters</dt>
 <dd><p>Deprecated, alias for <code>keep</code>.</p></dd>
+
+
 <dt>table_wide</dt>
 <dd><p>Logical that decides whether the ANOVA table should be in
 wide format, i.e. should the numerator and denominator degrees of freedom
 be in the same row. Default: <code>FALSE</code>.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Toggle warnings and messages.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame of indices related to the model's parameters.</p>
+    
+
+<p>A data frame of indices related to the model's parameters.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
@@ -382,7 +417,7 @@ covariates are mean-centred and factors are coded with orthogonal contrasts
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

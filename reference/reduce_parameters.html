@@ -32,7 +32,7 @@ reduce_parameters.data.frame()."><meta property="og:image" content="/reference/f
     
     <a class="navbar-brand me-2" href="../index.html">parameters</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,8 @@ reduce_parameters.data.frame()."><meta property="og:image" content="/reference/f
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/overview_of_vignettes.html">Overview of Vignettes</a>
+    <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Parameters Description</h6>
     <a class="dropdown-item" href="../articles/model_parameters.html">Summary of Model Parameters</a>
     <a class="dropdown-item" href="../articles/model_parameters_standardized.html">Standardized Model Parameters</a>
@@ -115,9 +117,13 @@ data analysis workflow. <code>reduce_data()</code> is an alias for
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>A data frame or a statistical model.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>The feature reduction method. Can be one of <code>"PCA"</code>, <code>"cMDS"</code>,
 <code>"DRR"</code>, <code>"ICA"</code> (see the 'Details' section).</p></dd>
+
+
 <dt>n</dt>
 <dd><p>Number of components to extract. If <code>n="all"</code>, then <code>n</code> is
 set as the number of variables minus 1 (<code>ncol(x)-1</code>). If
@@ -126,13 +132,18 @@ selected through <code><a href="n_factors.html">n_factors()</a></code> resp. <co
 In <code>reduce_parameters()</code>, can also be <code>"max"</code>, in which case
 it will select all the components that are maximally pseudo-loaded (i.e.,
 correlated) by at least one variable.</p></dd>
+
+
 <dt>distance</dt>
 <dd><p>The distance measure to be used. Only applies when
 <code>method = "cMDS"</code>. This must be one of <code>"euclidean"</code>, <code>"maximum"</code>,
 <code>"manhattan"</code>, <code>"canberra"</code>, <code>"binary"</code> or <code>"minkowski"</code>. Any unambiguous
 substring can be given.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -164,9 +175,9 @@ source, which makes it a poor tool for dimensionality reduction. Requires the
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     
-<ul><li><p>Nguyen, L. H., \&amp; Holmes, S. (2019). Ten quick tips for effective
+<ul><li><p>Nguyen, L. H., and Holmes, S. (2019). Ten quick tips for effective
 dimensionality reduction. PLOS Computational Biology, 15(6).</p></li>
-<li><p>Laparra, V., Malo, J., &amp; Camps-Valls, G. (2015). Dimensionality
+<li><p>Laparra, V., Malo, J., and Camps-Valls, G. (2015). Dimensionality
 reduction via regression in hyperspectral imagery. IEEE Journal of Selected
 Topics in Signal Processing, 9(6), 1026-1036.</p></li>
 </ul></div>
@@ -233,7 +244,7 @@ Topics in Signal Processing, 9(6), 1026-1036.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>
