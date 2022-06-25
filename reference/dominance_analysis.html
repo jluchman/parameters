@@ -140,38 +140,38 @@ from being evaluated before being applied to the model and causing an error.</p>
 
 
 <p>An object of class <code>"parameters_da"</code> is a list of <code>data.frame</code>s composed
-of the following elements:</p><dl><dt><code>general</code></dt>
+of the following elements:</p><dl><dt><code>General</code></dt>
 <dd><p>A <code>data.frame</code> which associates dominance statistics with
-model parameters. The variables in this <code>data.frame</code> include:</p><dl><dt><code>parameter</code></dt>
+model parameters. The variables in this <code>data.frame</code> include:</p><dl><dt><code>Parameter</code></dt>
 <dd><p>Parameter names.</p></dd>
 
-<dt><code>general_dominance</code></dt>
+<dt><code>General_Dominance</code></dt>
 <dd><p>Vector of general dominance statistics.
 The R2 ascribed to variables in the <code>all</code> argument are also reported
 here though they are not general dominance statistics.</p></dd>
 
-<dt><code>standardized</code></dt>
+<dt><code>Percent</code></dt>
 <dd><p>Vector of general dominance statistics normalized
 to sum to 1.</p></dd>
 
-<dt><code>ranks</code></dt>
+<dt><code>Ranks</code></dt>
 <dd><p>Vector of ranks applied to the general dominance
 statistics.</p></dd>
 
-<dt><code>subset</code></dt>
+<dt><code>Subset</code></dt>
 <dd><p>Names of the subset to which the parameter belongs in
-the dominance analysis.  Each other <code>data.frame</code> will refer to these
-subset names.</p></dd>
+the dominance analysis.  Each other <code>data.frame</code> returned will refer
+to these subset names.</p></dd>
 
 </dl></dd>
 
-<dt><code>conditional_dominance</code></dt>
+<dt><code>Conditional</code></dt>
 <dd><p>A <code>data.frame</code> of conditional dominance
 statistics.  Each observation represents a subset and each variable
 represents an the average increment to R2 with a specific number of
 subsets in the model.  <code>NULL</code> if <code>conditional</code> argument is <code>FALSE</code>.</p></dd>
 
-<dt><code>complete_dominance</code></dt>
+<dt><code>Complete</code></dt>
 <dd><p>A <code>data.frame</code> of complete dominance
 designations. The subsets in the observations are compared to the
 subsets referenced in each variable. Whether the subset
@@ -246,7 +246,6 @@ regression based on variance decomposition. The American Statistician,
 <span class="r-in">  <span class="fu">dominance_analysis</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in">  <span class="co"># Dominance Analysis with Weighted Logit Regression</span></span>
-<span class="r-in"></span>
 <span class="r-in">  <span class="va">model_wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">carb</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span class="r-in">    weights <span class="op">=</span> <span class="va">wt</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -269,24 +268,24 @@ regression based on variance decomposition. The American Statistician,
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> General Dominance Statistics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> parameter   | general_dominance | standardized | ranks |   subset</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |                   |              |       | constant</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> cyl         |             0.390 |        0.503 |     1 |      cyl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> carb        |             0.174 |        0.224 |     3 |     carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mpg         |             0.212 |        0.273 |     2 |      mpg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | General Dominance | Percent | Ranks |   Subset</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |                   |         |       | constant</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl         |             0.390 |   0.503 |     1 |      cyl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> carb        |             0.174 |   0.224 |     3 |     carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mpg         |             0.212 |   0.273 |     2 |      mpg</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Conditional Dominance Statistics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> subset | IVs_1 | IVs_2 | IVs_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> cyl    | 0.679 | 0.279 | 0.213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> carb   | 0.376 | 0.062 | 0.083</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mpg    | 0.496 | 0.100 | 0.039</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Subset | IVs: 1 | IVs: 2 | IVs: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl    |  0.679 |  0.279 |  0.213</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> carb   |  0.376 |  0.062 |  0.083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mpg    |  0.496 |  0.100 |  0.039</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Complete Dominance Designations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> subset | &lt; cyl | &lt; carb | &lt; mpg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Subset | &lt; cyl | &lt; carb | &lt; mpg</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cyl    |       |  FALSE | FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> carb   |  TRUE |        |      </span>
