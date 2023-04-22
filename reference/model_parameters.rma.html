@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">parameters</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.20.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.21.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,6 +101,8 @@
 <span>  standardize <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  exponentiate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  include_studies <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  keep <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drop <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -164,6 +166,32 @@ non-Gaussian families.</p></dd>
 for all studies. Else, only parameters for overall-effects are shown.</p></dd>
 
 
+<dt>keep</dt>
+<dd><p>Character containing a regular expression pattern that
+describes the parameters that should be included (for <code>keep</code>) or excluded
+(for <code>drop</code>) in the returned data frame. <code>keep</code> may also be a
+named list of regular expressions. All non-matching parameters will be
+removed from the output. If <code>keep</code> is a character vector, every parameter
+name in the <em>"Parameter"</em> column that matches the regular expression in
+<code>keep</code> will be selected from the returned data frame (and vice versa,
+all parameter names matching <code>drop</code> will be excluded). Furthermore, if
+<code>keep</code> has more than one element, these will be merged with an <code>OR</code>
+operator into a regular expression pattern like this: <code>"(one|two|three)"</code>.
+If <code>keep</code> is a named list of regular expression patterns, the names of the
+list-element should equal the column name where selection should be
+applied. This is useful for model objects where <code><a href="model_parameters.html">model_parameters()</a></code>
+returns multiple columns with parameter components, like in
+<code><a href="model_parameters.principal.html">model_parameters.lavaan()</a></code>. Note that the regular expression pattern
+should match the parameter names as they are stored in the returned data
+frame, which can be different from how they are printed. Inspect the
+<code>$Parameter</code> column of the parameters table to get the exact parameter
+names.</p></dd>
+
+
+<dt>drop</dt>
+<dd><p>See <code>keep</code>.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Toggle warnings and messages.</p></dd>
 
@@ -193,7 +221,7 @@ passed down to <code><a href="bootstrap_model.html">bootstrap_model()</a></code>
 <span class="r-in"><span>  <span class="fu"><a href="model_parameters.html">model_parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading the 'metafor' package (version 3.8-1). For an</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading the 'metafor' package (version 4.0-0). For an</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> introduction to the package please type: help(metafor)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘metafor’</span>
@@ -225,44 +253,46 @@ passed down to <code><a href="bootstrap_model.html">bootstrap_model()</a></code>
 <span class="r-in"><span>    data <span class="op">=</span> <span class="va">dat.bcg</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">dat</span><span class="op">$</span><span class="va">alloc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">alloc</span> <span class="op">==</span> <span class="st">"random"</span>, <span class="st">"random"</span>, <span class="st">"other"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html" class="external-link">rma</a></span><span class="op">(</span><span class="va">yi</span>, <span class="va">vi</span>, mods <span class="op">=</span> <span class="op">~</span><span class="va">alloc</span>, data <span class="op">=</span> <span class="va">dat</span>, digits <span class="op">=</span> <span class="fl">3</span>, slab <span class="op">=</span> <span class="va">author</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">d</span> <span class="op">&lt;&lt;-</span> <span class="va">dat</span></span></span>
+<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html" class="external-link">rma</a></span><span class="op">(</span><span class="va">yi</span>, <span class="va">vi</span>, mods <span class="op">=</span> <span class="op">~</span><span class="va">alloc</span>, data <span class="op">=</span> <span class="va">d</span>, digits <span class="op">=</span> <span class="fl">3</span>, slab <span class="op">=</span> <span class="va">author</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="model_parameters.html">model_parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Meta-analysis using 'metafor'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Random Effects </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter            | Coefficient |   SE |         95% CI |      z |      p | Weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Aronson              |       -0.89 | 0.57 | [-2.01,  0.23] |  -1.56 | 0.119  |   3.07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ferguson &amp; Simes     |       -1.59 | 0.44 | [-2.45, -0.72] |  -3.59 | &lt; .001 |   5.14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rosenthal et al.1    |       -1.35 | 0.64 | [-2.61, -0.08] |  -2.09 | 0.036  |   2.41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hart &amp; Sutherland    |       -1.44 | 0.14 | [-1.72, -1.16] | -10.19 | &lt; .001 |  49.97</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Frimodt-Moller et al |       -0.22 | 0.23 | [-0.66,  0.23] |  -0.96 | 0.336  |  19.53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Stein &amp; Aronson      |       -0.79 | 0.08 | [-0.95, -0.62] |  -9.46 | &lt; .001 | 144.81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Vandiviere et al     |       -1.62 | 0.47 | [-2.55, -0.70] |  -3.43 | &lt; .001 |   4.48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TPT Madras           |        0.01 | 0.06 | [-0.11,  0.14] |   0.19 | 0.849  | 252.42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Coetzee &amp; Berjak     |       -0.47 | 0.24 | [-0.94,  0.00] |  -1.98 | 0.048  |  17.72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rosenthal et al.2    |       -1.37 | 0.27 | [-1.90, -0.84] |  -5.07 | &lt; .001 |  13.69</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comstock et al.1     |       -0.34 | 0.11 | [-0.56, -0.12] |  -3.05 | 0.002  |  80.57</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comstock &amp; Webster   |        0.45 | 0.73 | [-0.98,  1.88] |   0.61 | 0.541  |   1.88</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comstock et al.2     |       -0.02 | 0.27 | [-0.54,  0.51] |  -0.06 | 0.948  |  14.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Overall              |       -0.47 | 0.26 | [-0.97,  0.04] |  -1.82 | 0.069  |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> allocrandom          |       -0.49 | 0.36 | [-1.20,  0.22] |  -1.35 | 0.176  |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter         | Coefficient |   SE |         95% CI |      z |      p | Weight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Aronson           |       -0.89 | 0.57 | [-2.01,  0.23] |  -1.56 | 0.119  |   3.07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ferguson &amp; Simes  |       -1.59 | 0.44 | [-2.45, -0.72] |  -3.59 | &lt; .001 |   5.14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rosenthal et al.1 |       -1.35 | 0.64 | [-2.61, -0.08] |  -2.09 | 0.036  |   2.41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hart &amp; Sutherland |       -1.44 | 0.14 | [-1.72, -1.16] | -10.19 | &lt; .001 |  49.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Vandiviere et al  |       -1.62 | 0.47 | [-2.55, -0.70] |  -3.43 | &lt; .001 |   4.48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TPT Madras        |        0.01 | 0.06 | [-0.11,  0.14] |   0.19 | 0.849  | 252.42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coetzee &amp; Berjak  |       -0.47 | 0.24 | [-0.94,  0.00] |  -1.98 | 0.048  |  17.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Overall           |       -0.49 | 0.36 | [-1.20,  0.22] |  -1.35 | 0.176  |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># other </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter            | Coefficient |   SE |         95% CI |     z |      p | Weight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Frimodt-Moller et al |       -0.22 | 0.23 | [-0.66,  0.23] | -0.96 | 0.336  |  19.53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Stein &amp; Aronson      |       -0.79 | 0.08 | [-0.95, -0.62] | -9.46 | &lt; .001 | 144.81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rosenthal et al.2    |       -1.37 | 0.27 | [-1.90, -0.84] | -5.07 | &lt; .001 |  13.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Comstock et al.1     |       -0.34 | 0.11 | [-0.56, -0.12] | -3.05 | 0.002  |  80.57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Comstock &amp; Webster   |        0.45 | 0.73 | [-0.98,  1.88] |  0.61 | 0.541  |   1.88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Comstock et al.2     |       -0.02 | 0.27 | [-0.54,  0.51] | -0.06 | 0.948  |  14.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Overall              |       -0.47 | 0.26 | [-0.97,  0.04] | -1.82 | 0.069  |       </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uncertainty intervals (equal-tailed) and p-values (two-tailed) computed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   using a Wald z-distribution approximation.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/danheck/metaBMA" class="external-link">"metaBMA"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">towels</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/metaBMA/man/meta_random.html" class="external-link">meta_random</a></span><span class="op">(</span><span class="va">logOR</span>, <span class="va">SE</span>, <span class="va">study</span>, data <span class="op">=</span> <span class="va">towels</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/metaBMA/man/meta_random.html" class="external-link">meta_random</a></span><span class="op">(</span><span class="va">logOR</span>, <span class="va">SE</span>, <span class="va">study</span>, data <span class="op">=</span> <span class="va">towels</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="model_parameters.html">model_parameters</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> This is metaBMA version 0.6.7</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - Default priors were changed in version 0.6.6.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - Since default priors may change again, it is safest to specify priors (even when using the defaults).</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 4 divergent transitions after warmup. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Studies </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                                           | Coefficient |   SE |        95% CI | Weight |                                 Method</span>
@@ -277,10 +307,10 @@ passed down to <code><a href="bootstrap_model.html">bootstrap_model()</a></code>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Meta-Parameters </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter | Coefficient |   SE |        95% CI |    BF |  Rhat |    ESS |                     Prior |                                 Method</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Overall   |        0.19 | 0.14 | [-0.05, 0.40] | 0.804 | 1.011 | 282.00 |   Student's t (0 +- 0.71) | Bayesian meta-analysis using 'metaBMA'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tau       |        0.14 | 0.16 | [ 0.03, 0.43] |       | 1.020 | 183.00 | Inverse gamma (1 +- 0.15) | Bayesian meta-analysis using 'metaBMA'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter | Coefficient |   SE |        95% CI |    BF |  Rhat |     ESS |                     Prior |                                 Method</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Overall   |        0.20 | 0.11 | [-0.03, 0.40] | 0.804 | 1.001 | 5705.00 |   Student's t (0 +- 0.71) | Bayesian meta-analysis using 'metaBMA'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tau       |        0.13 | 0.10 | [ 0.03, 0.38] |       | 1.000 | 3038.00 | Inverse gamma (1 +- 0.15) | Bayesian meta-analysis using 'metaBMA'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uncertainty intervals (equal-tailed) and p-values (two-tailed) computed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   using a MCMC distribution approximation.</span>
