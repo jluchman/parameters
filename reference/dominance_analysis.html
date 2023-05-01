@@ -210,8 +210,9 @@ statistic but is not considered a part of the dominance analysis and
 therefore does not receive a rank, conditional dominance statistics, or
 complete dominance designations.</p>
 <p>The input model is parsed using <code><a href="https://easystats.github.io/insight/reference/find_predictors.html" class="external-link">insight::find_predictors()</a></code>, does not
-yet support interactions, transformations, or offsets applied in the
-R formula, and will fail with an error if any such terms are detected.</p>
+yet support interactions, transformations, factor variables created by
+<code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code> or offsets applied in the R formula, and will fail
+with an error if any such terms are detected.</p>
 <p>The model submitted must accept an formula object as a <code>formula</code>
 argument.  In addition, the model object must accept the data on which
 the model is estimated as a <code>data</code> argument.  Formulas submitted
@@ -224,9 +225,6 @@ is_multivariate", "is_zero_inflated",
 or "is_hurdle" are not supported at current.</p>
 <p>When <code><a href="https://easystats.github.io/performance/reference/r2.html" class="external-link">performance::r2()</a></code> returns multiple values, only the first is used
 by default.</p>
-<p>The underlying <code><a href="https://rdrr.io/pkg/domir/man/domin.html" class="external-link">domir::domin()</a></code> function that implements the dominance
-statistic and designation computations has only been tested to R version
-3.5 and will fail with an error if called in R versions &lt; 3.5.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -252,8 +250,7 @@ regression based on variance decomposition. The American Statistician,
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">getRversion</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="st">"3.5.0"</span> <span class="op">&amp;&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jluchman/domir" class="external-link">"domir"</a></span><span class="op">)</span> <span class="op">&amp;&amp;</span></span></span>
-<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/performance/" class="external-link">"performance"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jluchman/domir" class="external-link">"domir"</a></span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/performance/" class="external-link">"performance"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Dominance Analysis with Logit Regression</span></span></span>
